@@ -23,3 +23,8 @@ if __name__ == "__main__":
                              help="A file containing Brainfuck source code.")
     arguments = file_parser.parse_args()
     Brainfuck(arguments.brainfuck_file).execute()
+
+
+# NOTE: Remember to add package path manually...
+# don't want to add it to PYTHONPATH permanently right now.
+# export PYTHONPATH='/BLAH/BLAH/BLAH/ComputerScienceFromScratch'
