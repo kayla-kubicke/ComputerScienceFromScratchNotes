@@ -31,25 +31,41 @@ class Brainfuck:
         while instruction_index < len(self.source_code):
             instruction = self.source_code[instruction_index]
             match instruction:
+            # Brainfuck has the following 8 commands... operating essentially as a
+            # Turing machine, thus the language can be used to write any (computer) algorithm.
+            # Just a theory vs real-life pushing-up-glasses note:
+            # A pure turing machine requires an infinitely long ticket tape (array).
+            # Since a real turing machine will always have a memory cap, the term
+            # "Linear Bounded Automata" is used to indicate a restricted turing machine.
+
+                # Moves one cell to the right.
                 case ">":
                     cell_index += 1
+                # Moves one cell to the left.
                 case "<":
                     cell_index -= 1
+                # Increments current cell.
                 case "+":
                     cells[cell_index] = clamp0_255_wraparound(cells[cell_index] + 1)
+                # Decrements current cell.
                 case "-":
                     cells[cell_index] = clamp0_255_wraparound(cells[cell_index] - 1)
+                # Prints the value of current cell.
                 case ".":
                     print(chr(cells[cell_index]), end='', flush=True)
+                # Reads value of current cell.
                 case ",":
                     cells[cell_index] = clamp0_255_wraparound(int(input()))
+                # If the cell is zero, moves to the associated closing bracket.
                 case "[":
                     if cells[cell_index] == 0:
                         instruction_index = self.find_bracket_match(instruction_index, True)
+                # If the cell is nonzero, moves to the associated opening bracket.
                 case "]":
                     if cells[cell_index] != 0:
                         instruction_index = self.find_bracket_match(instruction_index, False)
             instruction_index += 1
+            # https://www.youtube.com/watch?v=BBOeNXyYmeE
 
     # Find the location of the corresponding bracket to the one at *start*
     # If *forward* is true go to the right looking for a matching "]"
