@@ -16,7 +16,18 @@
 from pathlib import Path
 
 
+# The Brainfuck interpreter.
 class Brainfuck:
+        # An interpreter will contain, at the bare minimum, the following three pieces:
+            # - Tokenizer ("lexer")
+                # Separates original code into the smallest possible constructs of the language, called
+                # tokens.
+            # - Parser
+                # Looks at the tokens and determines their meaning. (Typically) builds an abstract syntax tree
+                # to explain the relationships between the tokens.
+            # - Runtime Environment
+                # Processes the tree and executes the operations.
+
     def __init__(self, file_name: str | Path):
         # Open text file and store in instance variable
         with open(file_name, "r") as text_file:
@@ -31,7 +42,7 @@ class Brainfuck:
         while instruction_index < len(self.source_code):
             instruction = self.source_code[instruction_index]
             match instruction:
-            # Brainfuck has the following 8 commands... operating essentially as a
+            # Brainfuck has the following 8 commands... operating as a
             # Turing machine, thus the language can be used to write any (computer) algorithm.
             # Just a theory vs real-life pushing-up-glasses note:
             # A pure turing machine requires an infinitely long ticket tape (array).
@@ -65,12 +76,12 @@ class Brainfuck:
                     if cells[cell_index] != 0:
                         instruction_index = self.find_bracket_match(instruction_index, False)
             instruction_index += 1
-            # https://www.youtube.com/watch?v=BBOeNXyYmeE
 
     # Find the location of the corresponding bracket to the one at *start*
     # If *forward* is true go to the right looking for a matching "]"
     # Otherwise do the reverse
     def find_bracket_match(self, start: int, forward: bool) -> int:
+        # Book touches on it, just could use stack, obviously.
         in_between_brackets = 0
         direction = 1 if forward else -1
         location = start + direction
@@ -97,3 +108,16 @@ def clamp0_255_wraparound(num: int) -> int:
         return 255
     else:
         return num
+
+
+
+# Just found Jericho at the thrift store over the weekend.*
+# https://www.youtube.com/watch?v=QFxXTO1t5yo
+
+# Also, found a compilation called "Moments to Remember" that I bought because it has
+# Sea of Love which simultaneously comforts me and gives me an urge to s1it my wrists.
+# You know what is funny? "Moments to Remember" has that Tom Dooley ballad.
+# How is that a moment to remember???
+
+# *Also, no one needs to know this, but one of my favorites:
+# https://www.youtube.com/watch?v=n3uQpMfNnE8
