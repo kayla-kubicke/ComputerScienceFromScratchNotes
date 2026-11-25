@@ -35,6 +35,13 @@ class Brainfuck:
 
     def execute(self):
         # Setup state
+
+        # An array that mimics the ticket tape. Each cell may be empty or contain a single
+        # character, in this case an unsigned integer.
+        # Keep in mind that Brainfuck only reads and writes (raw, ) integers and converts
+        # the integer with the "." command into
+        # Also, the max "ticket tape" length (size). A true turning machine
+        # would have an infinitely long tape (or array).
         cells: list[int] = [0] * 30000
         cell_index = 0
         instruction_index = 0
@@ -62,6 +69,9 @@ class Brainfuck:
                 case "-":
                     cells[cell_index] = clamp0_255_wraparound(cells[cell_index] - 1)
                 # Prints the value of current cell.
+                # The operation acts as an interpreter; the raw* integer value is converted into its
+                # ASCII equivalent. (The element itself IS NOT altered.)
+                # *Raw - uninterpreted, untyped
                 case ".":
                     print(chr(cells[cell_index]), end='', flush=True)
                 # Reads value of current cell.
@@ -109,15 +119,5 @@ def clamp0_255_wraparound(num: int) -> int:
     else:
         return num
 
-
-
-# Just found Jericho at the thrift store over the weekend.*
-# https://www.youtube.com/watch?v=QFxXTO1t5yo
-
-# Also, found a compilation called "Moments to Remember" that I bought because it has
-# Sea of Love which simultaneously comforts me and gives me an urge to s1it my wrists.
-# You know what is funny? "Moments to Remember" has that Tom Dooley ballad.
-# How is that a moment to remember???
-
-# *Also, no one needs to know this, but one of my favorites:
-# https://www.youtube.com/watch?v=n3uQpMfNnE8
+# Need to chill out for about 30 minutes?
+# https://www.youtube.com/watch?v=rh9bZO6mg1A
