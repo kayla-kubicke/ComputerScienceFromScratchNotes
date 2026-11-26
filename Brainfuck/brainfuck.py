@@ -71,7 +71,10 @@ class Brainfuck:
                 # Prints the value of current cell.
                 # The operation acts as an interpreter; the raw* integer value is converted into its
                 # ASCII equivalent. (The element itself IS NOT altered.)
-                # *Raw - uninterpreted, untyped
+                # *Raw - uninterpreted, untyped**
+                # ** !!! Personal note: Use these terms in relation to the layer of abstraction you
+                # are working on or you'll sound like a dumbass !!!
+                # https://www.youtube.com/watch?v=0bcIjILqORM
                 case ".":
                     print(chr(cells[cell_index]), end='', flush=True)
                 # Reads value of current cell.
@@ -109,7 +112,6 @@ class Brainfuck:
         print(f"Error: could not find match for {start_bracket} at {start}.")
         return start
 
-
 # Simulate a 1 byte unsigned integer
 def clamp0_255_wraparound(num: int) -> int:
     if num > 255:
@@ -118,6 +120,3 @@ def clamp0_255_wraparound(num: int) -> int:
         return 255
     else:
         return num
-
-# Need to chill out for about 30 minutes?
-# https://www.youtube.com/watch?v=rh9bZO6mg1A
